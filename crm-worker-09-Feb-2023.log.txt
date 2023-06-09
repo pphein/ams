@@ -1,0 +1,62 @@
+2023-01-30 15:08:51,284 INFO Included extra file "/etc/supervisor/conf.d/ErpCustomerConsumerWorker.conf" during parsing
+2023-01-30 15:08:51,284 INFO Included extra file "/etc/supervisor/conf.d/ErpCustomerConsumerWorker.conf" during parsing
+2023-01-30 15:08:51,284 INFO Included extra file "/etc/supervisor/conf.d/ErpNrcConsumerWorker.conf" during parsing
+2023-01-30 15:08:51,284 INFO Included extra file "/etc/supervisor/conf.d/ErpNrcConsumerWorker.conf" during parsing
+2023-01-30 15:08:51,285 INFO Included extra file "/etc/supervisor/conf.d/LoanAppliedConsumerWorker.conf" during parsing
+2023-01-30 15:08:51,285 INFO Included extra file "/etc/supervisor/conf.d/LoanAppliedConsumerWorker.conf" during parsing
+2023-01-30 15:08:51,285 INFO Included extra file "/etc/supervisor/conf.d/LoanDisbursedConsumerWorker.conf" during parsing
+2023-01-30 15:08:51,285 INFO Included extra file "/etc/supervisor/conf.d/LoanDisbursedConsumerWorker.conf" during parsing
+2023-01-30 15:08:51,285 INFO Included extra file "/etc/supervisor/conf.d/LoanErpStatusConsumerWorker.conf" during parsing
+2023-01-30 15:08:51,285 INFO Included extra file "/etc/supervisor/conf.d/LoanErpStatusConsumerWorker.conf" during parsing
+2023-01-30 15:08:51,285 INFO Included extra file "/etc/supervisor/conf.d/LoanLeStatusConsumerWorker.conf" during parsing
+2023-01-30 15:08:51,285 INFO Included extra file "/etc/supervisor/conf.d/LoanLeStatusConsumerWorker.conf" during parsing
+2023-01-30 15:08:51,285 INFO Included extra file "/etc/supervisor/conf.d/LoanPaymentConsumerWorker.conf" during parsing
+2023-01-30 15:08:51,285 INFO Included extra file "/etc/supervisor/conf.d/LoanPaymentConsumerWorker.conf" during parsing
+2023-01-30 15:08:51,285 INFO Included extra file "/etc/supervisor/conf.d/ServiceIspConsumerWorker.conf" during parsing
+2023-01-30 15:08:51,285 INFO Included extra file "/etc/supervisor/conf.d/ServiceIspConsumerWorker.conf" during parsing
+2023-01-30 15:08:51,285 INFO Set uid to user 1000 succeeded
+2023-01-30 15:08:51,285 INFO Set uid to user 1000 succeeded
+2023-01-30 15:08:51,382 INFO RPC interface 'supervisor' initialized
+2023-01-30 15:08:51,382 INFO RPC interface 'supervisor' initialized
+2023-01-30 15:08:51,382 CRIT Server 'unix_http_server' running without any HTTP authentication checking
+2023-01-30 15:08:51,382 CRIT Server 'unix_http_server' running without any HTTP authentication checking
+2023-01-30 15:08:51,382 INFO supervisord started with pid 1
+2023-01-30 15:08:51,382 INFO supervisord started with pid 1
+2023-02-09 13:36:07,868 INFO spawned: 'erp-customer-consumer-worker' with pid 89
+2023-02-09 13:36:07,868 INFO spawned: 'erp-customer-consumer-worker' with pid 89
+2023-02-09 13:36:08,870 INFO success: erp-customer-consumer-worker entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2023-02-09 13:36:08,870 INFO success: erp-customer-consumer-worker entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+PHP Fatal error:  Access level to Modules\Commander\Services\Kafka\Handlers\Erp\ErpCustomerHandler::$syncTracker must be protected (as in class Modules\Commander\Services\Kafka\Handlers\BaseHandler) or weaker in /var/www/modules/Commander/Services/Kafka/Handlers/Erp/ErpCustomerHandler.php on line 35
+[2023-02-09 07:06:11]  qa.ERROR: Access level to Modules\Commander\Services\Kafka\Handlers\Erp\ErpCustomerHandler::$syncTracker must be protected (as in class Modules\Commander\Services\Kafka\Handlers\BaseHandler) or weaker {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Access level to Modules\\Commander\\Services\\Kafka\\Handlers\\Erp\\ErpCustomerHandler::$syncTracker must be protected (as in class Modules\\Commander\\Services\\Kafka\\Handlers\\BaseHandler) or weaker at /var/www/modules/Commander/Services/Kafka/Handlers/Erp/ErpCustomerHandler.php:35)
+[stacktrace]
+#0 {main}
+"} {"hostname":"crm-worker-7748c475d5-tf22j"}
+
+In ErpCustomerHandler.php line 35:
+                                                                               
+  Access level to Modules\Commander\Services\Kafka\Handlers\Erp\ErpCustomerHa  
+  ndler::$syncTracker must be protected (as in class Modules\Commander\Servic  
+  es\Kafka\Handlers\BaseHandler) or weaker                                     
+                                                                               
+
+2023-02-09 13:36:11,392 INFO exited: erp-customer-consumer-worker (exit status 255; not expected)
+2023-02-09 13:36:11,392 INFO exited: erp-customer-consumer-worker (exit status 255; not expected)
+2023-02-09 13:36:12,878 INFO spawned: 'erp-nrc-consumer-worker' with pid 99
+2023-02-09 13:36:12,878 INFO spawned: 'erp-nrc-consumer-worker' with pid 99
+2023-02-09 13:36:13,880 INFO success: erp-nrc-consumer-worker entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2023-02-09 13:36:13,880 INFO success: erp-nrc-consumer-worker entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+PHP Fatal error:  Access level to Modules\Commander\Services\Kafka\Handlers\Erp\ErpNrcHandler::$syncTracker must be protected (as in class Modules\Commander\Services\Kafka\Handlers\BaseHandler) or weaker in /var/www/modules/Commander/Services/Kafka/Handlers/Erp/ErpNrcHandler.php on line 17
+[2023-02-09 07:06:15]  qa.ERROR: Access level to Modules\Commander\Services\Kafka\Handlers\Erp\ErpNrcHandler::$syncTracker must be protected (as in class Modules\Commander\Services\Kafka\Handlers\BaseHandler) or weaker {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Access level to Modules\\Commander\\Services\\Kafka\\Handlers\\Erp\\ErpNrcHandler::$syncTracker must be protected (as in class Modules\\Commander\\Services\\Kafka\\Handlers\\BaseHandler) or weaker at /var/www/modules/Commander/Services/Kafka/Handlers/Erp/ErpNrcHandler.php:17)
+[stacktrace]
+#0 {main}
+"} {"hostname":"crm-worker-7748c475d5-tf22j"}
+
+In ErpNrcHandler.php line 17:
+                                                                               
+  Access level to Modules\Commander\Services\Kafka\Handlers\Erp\ErpNrcHandler  
+  ::$syncTracker must be protected (as in class Modules\Commander\Services\Ka  
+  fka\Handlers\BaseHandler) or weaker                                          
+                                                                               
+
+2023-02-09 13:36:15,588 INFO exited: erp-nrc-consumer-worker (exit status 255; not expected)
+2023-02-09 13:36:15,588 INFO exited: erp-nrc-consumer-worker (exit status 255; not expected)
