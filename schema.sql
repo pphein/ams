@@ -24,7 +24,7 @@ CREATE TABLE `districts` (
   KEY `idx_en_name` (`en_name`),
   KEY `idx_p_code` (`p_code`),
   KEY `idx_state_id` (`state_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 CREATE TABLE `cities` (
   `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -38,7 +38,7 @@ CREATE TABLE `cities` (
   KEY `idx_en_name` (`en_name`),
   KEY `idx_p_code` (`p_code`),
   KEY `idx_state_id` (`state_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 CREATE TABLE `townships` (
   `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -56,7 +56,7 @@ CREATE TABLE `townships` (
   KEY `idx_district_id` (`district_id`),
   KEY `idx_city_id` (`city_id`),
   KEY `idx_state_id` (`state_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 
 CREATE TABLE `towns` (
@@ -77,4 +77,4 @@ CREATE TABLE `towns` (
   KEY `idx_district_id` (`district_id`),
   KEY `idx_city_id` (`city_id`),
   KEY `idx_state_id` (`state_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
