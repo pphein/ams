@@ -18,8 +18,8 @@ class TownDataModel extends BaseDataModel
     public string $country_code = '';
 
     public function __construct(
-        private ?TownInterface $state
+        private ?TownInterface $town
     ) {
-        $this->mapProperties($state);
+        $this->mapProperties($town);
     }
 }

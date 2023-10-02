@@ -40,14 +40,9 @@ class TownRepository implements TownRepositoryInterface
         ]);
     }
 
-    public function getTownByStateId(int $stateId, int $perPage, int $page): mixed
-    {
-        return $this->town->where('state_id', $stateId)->where('status', 0)->paginate(perPage: $perPage, page: $page);
-    }
-
     public function getTownByDistrictId(int $districtId, int $perPage, int $page): mixed
     {
-        return $this->town->where('district_id', $districtId)->where('status', 0)->paginate(perPage: $perPage, page: $page);
+        return $this->town->where('District_id', $districtId)->where('status', 0)->paginate(perPage: $perPage, page: $page);
     }
 
     public function getTownByCityId(int $cityId, int $perPage, int $page): mixed

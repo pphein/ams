@@ -61,16 +61,6 @@ class TownService implements TownServiceInterface
         return $this->townRepo->destroyTownById($id);
     }
 
-    public function getTownByStateId(int $id, Request $request): TownListDataModel
-    {
-        $perPage = $request->per_page ?? 10;
-        $page = $request->page ?? 1;
-
-        $result = $this->townRepo->getTownByStateId($id, $perPage, $page);
-
-        return new TownListDataModel($result);
-    }
-
     public function getTownByDistrictId(int $id, Request $request): TownListDataModel
     {
         $perPage = $request->per_page ?? 10;

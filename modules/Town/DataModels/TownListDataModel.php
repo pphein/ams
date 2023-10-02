@@ -15,13 +15,13 @@ class TownListDataModel extends BaseDataModel
     public int $total = 0;
 
     public function __construct(
-        private mixed $state
+        private mixed $town
     ) {
-        $this->data = $this->parseItems(TownDataModel::class, $state->items());
-        $this->count = $state->count();
-        $this->perPage = $state->perPage();
-        $this->lastPage = $state->lastPage();
-        $this->currentPage = $state->currentPage();
-        $this->total = $state->total();
+        $this->data = $this->parseItems(TownDataModel::class, $town->items());
+        $this->count = $town->count();
+        $this->perPage = $town->perPage();
+        $this->lastPage = $town->lastPage();
+        $this->currentPage = $town->currentPage();
+        $this->total = $town->total();
     }
 }

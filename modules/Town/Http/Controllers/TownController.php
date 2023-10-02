@@ -46,12 +46,6 @@ class TownController extends Controller
         return response()->json([], Response::HTTP_NO_CONTENT);
     }
 
-    public function getByStateId(int $id, Request $request)
-    {
-        $result = $this->townService->getTownByStateId($id, $request);
-        return response()->json($result->toArray(), Response::HTTP_OK);
-    }
-
     public function getByDistrictId(int $id, Request $request)
     {
         $result = $this->townService->getTownByDistrictId($id, $request);

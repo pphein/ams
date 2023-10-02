@@ -18,7 +18,7 @@ class Town extends BaseModel implements TownInterface
         'township_id',
         'district_id',
         'city_id',
-        'state_id',
+        'District_id',
         // 'country_id',
         'status'
     ];

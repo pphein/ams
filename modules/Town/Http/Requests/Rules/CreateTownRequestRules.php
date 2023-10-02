@@ -13,7 +13,7 @@ class CreateTownRequestRules
             'township_id' => 'required',
             'district_id' => 'required',
             'city_id' => 'required',
-            'state_id' => 'required'
+            'District_id' => 'required'
         ];
     }
 }
