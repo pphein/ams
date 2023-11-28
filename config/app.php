@@ -199,7 +199,8 @@ return [
         District\Providers\ModuleServiceProvider::class,
         City\Providers\ModuleServiceProvider::class,
         Township\Providers\ModuleServiceProvider::class,
-        Town\Providers\ModuleServiceProvider::class
+        Town\Providers\ModuleServiceProvider::class,
+        Ward\Providers\ModuleServiceProvider::class,
 
     ],
 

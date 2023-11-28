@@ -5,6 +5,7 @@ namespace Township\Services;
 use Illuminate\Http\Request;
 use App\Helpers\DataSafetyTrait;
 use Township\DataModels\TownshipDataModel;
+use Illuminate\Database\Eloquent\Collection;
 use Township\DataModels\TownshipListDataModel;
 use Township\Contracts\Services\TownshipServiceInterface;
 use Township\Contracts\Repositories\TownshipRepositoryInterface;
@@ -17,17 +18,21 @@ class TownshipService implements TownshipServiceInterface
         private TownshipRepositoryInterface $townshipRepo
     ) {
     }
-    public function getTownshipLists(Request $request): TownshipListDataModel
+    public function getTownshipLists(Request $request): Collection
     {
-        $perPage = $request->per_page ?? 10;
-        $page = $request->page ?? 1;
+        // if (!empty($request->district_id) && !empty($request->city_id)) {
+        //     $result = $this->townshipRepo->getTownshipByDistrictAndCity($request);
+        //     return new TownshipListDataModel($result);
+        // }
 
-        if (!empty($request->district_id) && !empty($request->city_id)) {
-            $result = $this->townshipRepo->getTownshipByDistrictAndCity($request);
-            return new TownshipListDataModel($result);
-        }
+        $result = $this->townshipRepo->getTownshipLists();
 
-        $result = $this->townshipRepo->getTownshipLists($perPage, $page);
+        return $result;
+    }
+
+    public function getTownshipPagination(int $perPage, int $page): TownshipListDataModel
+    {
+        $result = $this->townshipRepo->getTownshipPagination($perPage, $page);
 
         return new TownshipListDataModel($result);
     }

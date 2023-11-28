@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Helpers\DataSafetyTrait;
 use Town\DataModels\TownDataModel;
 use Town\DataModels\TownListDataModel;
+use Illuminate\Database\Eloquent\Collection;
 use Town\Contracts\Services\TownServiceInterface;
 use Town\Contracts\Repositories\TownRepositoryInterface;
 
@@ -17,17 +18,21 @@ class TownService implements TownServiceInterface
         private TownRepositoryInterface $townRepo
     ) {
     }
-    public function getTownLists(Request $request): TownListDataModel
+    public function getTownLists(Request $request): Collection
     {
-        $perPage = $request->per_page ?? 10;
-        $page = $request->page ?? 1;
+        // if (!empty($request->district_id) && !empty($request->city_id)) {
+        //     $result = $this->townRepo->getTownByDistrictAndCity($request);
+        //     return new TownListDataModel($result);
+        // }
 
-        if (!empty($request->district_id) && !empty($request->city_id)) {
-            $result = $this->townRepo->getTownByDistrictAndCity($request);
-            return new TownListDataModel($result);
-        }
+        $result = $this->townRepo->getTownLists();
 
-        $result = $this->townRepo->getTownLists($perPage, $page);
+        return $result;
+    }
+
+    public function getTownPagination(int $perPage, int $page): TownListDataModel
+    {
+        $result = $this->townRepo->getTownPagination($perPage, $page);
 
         return new TownListDataModel($result);
     }

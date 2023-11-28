@@ -18,7 +18,14 @@ class TownController extends Controller
 
     public function list(Request $request)
     {
-        $result = $this->townService->getTownLists($request);
+        if ($request->per_page || $request->page) {
+            $perPage = $request->per_page ?? 10;
+            $page = $request->page ?? 1;
+            $result = $this->townService->getTownPagination($perPage, $page);
+        } else {
+            $result = $this->townService->getTownLists($request);
+        }
+        
         return response()->json($result->toArray(), Response::HTTP_OK);
     }
 

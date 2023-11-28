@@ -29,7 +29,7 @@ class StateMigrate extends Command
         $data = $this->prepareStateData();
         foreach ($data as $key => $value) {
             $formattedData = $this->formatStateData($value);
-            $this->stateService->createState($formattedData);
+            $this->stateService->firstOrCreateState($formattedData);
         }
     }
 

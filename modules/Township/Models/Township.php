@@ -18,7 +18,6 @@ class Township extends BaseModel implements TownshipInterface
         'district_id',
         'city_id',
         'state_id',
-        'country_id',
         'status'
     ];
 }

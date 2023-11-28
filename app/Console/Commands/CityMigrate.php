@@ -30,15 +30,18 @@ class CityMigrate extends Command
     {
         $data = $this->prepareCityData();
         foreach ($data as $key => $value) {
-            Log::info("City migration data >> " . print_r($value, true));
+            // Log::info("City migration data >> " . print_r($value, true));
             $stateName = $value['SR Name_Eng'];
             $statePCode = $value['SR_Pcode'];
             $formattedData = $this->formatCityData($value);
             $stateInfo = $this->stateRepo->getStateByNameAndPCode($stateName, $statePCode);
             if (!empty($stateInfo)) {
                 $formattedData['state_id'] = $stateInfo->id;
-                // $formattedData['country_id'] = $stateInfo->country_id;
-                $this->cityService->createCity($formattedData);
+                $this->cityService->firstOrCreateCity($formattedData);
+            } else {
+                Log::info("Failed to create >> " . $formattedData['en_name']);
+                Log::info("State info >> " . json_encode($stateInfo));
+                dd();
             }
         }
     }

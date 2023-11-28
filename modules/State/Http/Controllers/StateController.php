@@ -18,7 +18,14 @@ class StateController extends Controller
 
     public function list(Request $request)
     {
-        $result = $this->stateService->getStateLists($request);
+        if ($request->per_page || $request->page) {
+            $perPage = $request->per_page ?? 10;
+            $page = $request->page ?? 1;
+            $result = $this->stateService->getStatePagination($perPage, $page);
+        } else {
+            $result = $this->stateService->getStateLists($request);
+        }
+
         return response()->json($result->toArray(), Response::HTTP_OK);
     }
 

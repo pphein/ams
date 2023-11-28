@@ -39,7 +39,8 @@
             "District\\": "modules/District",
             "City\\": "modules/City",
             "Township\\": "modules/Township",
-            "Town\\": "modules/Town"
+            "Town\\": "modules/Town",
+            "Ward\\": "modules/Ward"
         }
     },
     "scripts": {

@@ -4,6 +4,7 @@ namespace Town\Repositories;
 
 use Illuminate\Http\Request;
 use Town\Contracts\Models\TownInterface;
+use Illuminate\Database\Eloquent\Collection;
 use Town\Contracts\Repositories\TownRepositoryInterface;
 
 class TownRepository implements TownRepositoryInterface
@@ -13,7 +14,12 @@ class TownRepository implements TownRepositoryInterface
     ) {
     }
 
-    public function getTownLists(int $perPage, int $page): mixed
+    public function getTownLists(): Collection
+    {
+        return $this->town->where('status', 0)->get();
+    }
+
+    public function getTownPagination(int $perPage, int $page): mixed
     {
         return $this->town->where('status', 0)->paginate(perPage: $perPage, page: $page);
     }
@@ -66,5 +72,10 @@ class TownRepository implements TownRepositoryInterface
             ->where('city_id', $cityId)
             ->where('district', $districtId)
             ->where('status', 0)->paginate(perPage: $perPage, page: $page);
+    }
+
+    public function getTownByNameAndPCode(string $name, string $PCode): ?TownInterface
+    {
+        return $this->town->where('en_name', $name)->where('p_code', $PCode)->where('status', 0)->first();
     }
 }

@@ -16,7 +16,6 @@ class District extends BaseModel implements DistrictInterface
         'mm_name',
         'p_code',
         'state_id',
-        'country_id',
         'status'
     ];
 }

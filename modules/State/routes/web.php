@@ -8,7 +8,7 @@ Route::group([
     'prefix' => 'address/api/v1',
     'middleware' => ['cors']
 ], function () {
-    Route::group(['prefix' => 'state'], function () {
+    Route::group(['prefix' => 'states'], function () {
         Route::get('/', 'StateController@list')->name('state.list');
         Route::post('/', 'StateController@create')->name('state.create');
         Route::get('/{id}', 'StateController@show')->name('state.show');

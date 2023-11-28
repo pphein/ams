@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Helpers\DataSafetyTrait;
 use City\DataModels\CityDataModel;
 use City\DataModels\CityListDataModel;
+use Illuminate\Database\Eloquent\Collection;
 use City\Contracts\Services\CityServiceInterface;
 use City\Contracts\Repositories\CityRepositoryInterface;
 
@@ -17,31 +18,35 @@ class CityService implements CityServiceInterface
         private CityRepositoryInterface $cityRepo
     ) {
     }
-    public function getCityLists(Request $request): CityListDataModel
+    public function getCityLists(Request $request): Collection
     {
-        $perPage = $request->per_page ?? 10;
-        $page = $request->page ?? 1;
+        // if (!empty($request->state_id) && !empty($request->country_id)) {
+        //     $result = $this->cityRepo->getCityByStateAndCountry($request);
+        //     return new CityListDataModel($result);
+        // }
 
-        if (!empty($request->state_id) && !empty($request->country_id)) {
-            $result = $this->CityRepo->getCityByStateAndCountry($request);
-            return new CityListDataModel($result);
-        }
+        $result = $this->cityRepo->getCityLists();
 
-        $result = $this->CityRepo->getCityLists($perPage, $page);
+        return $result;
+    }
+
+    public function getCityPagination(int $perPage, int $page): CityListDataModel
+    {
+        $result = $this->cityRepo->getCityPagination($perPage, $page);
 
         return new CityListDataModel($result);
     }
 
-    public function createCity(array $data): CityDataModel
+    public function firstOrCreateCity(array $data): CityDataModel
     {
-        $result = $this->CityRepo->createCity($data);
+        $result = $this->cityRepo->firstOrCreateCity($data);
 
         return new CityDataModel($result);
     }
 
     public function showCityById(int $id): CityDataModel
     {
-        $result = $this->CityRepo->showCityById($id);
+        $result = $this->cityRepo->showCityById($id);
 
         if (!empty($result)) {
             $result = new CityDataModel($result);
@@ -51,14 +56,14 @@ class CityService implements CityServiceInterface
 
     public function updateCityById(int $id, $data): CityDataModel
     {
-        $result = $this->CityRepo->updateCityById($id, $data);
+        $result = $this->cityRepo->updateCityById($id, $data);
 
         return $this->showCityById($id);
     }
 
     public function destroyCityById(int $id): bool
     {
-        return $this->CityRepo->destroyCityById($id);
+        return $this->cityRepo->destroyCityById($id);
     }
 
     public function getCityByStateId(int $id, Request $request): CityListDataModel
@@ -66,7 +71,7 @@ class CityService implements CityServiceInterface
         $perPage = $request->per_page ?? 10;
         $page = $request->page ?? 1;
 
-        $result = $this->CityRepo->getCityByStateId($id, $perPage, $page);
+        $result = $this->cityRepo->getCityByStateId($id, $perPage, $page);
 
         return new CityListDataModel($result);
     }
@@ -76,7 +81,7 @@ class CityService implements CityServiceInterface
         $perPage = $request->per_page ?? 10;
         $page = $request->page ?? 1;
 
-        $result = $this->CityRepo->getCityByCountryId($id, $perPage, $page);
+        $result = $this->cityRepo->getCityByCountryId($id, $perPage, $page);
 
         return new CityListDataModel($result);
     }

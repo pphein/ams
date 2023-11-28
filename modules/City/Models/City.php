@@ -16,7 +16,6 @@ class City extends BaseModel implements CityInterface
         'mm_name',
         'p_code',
         'state_id',
-        'country_id',
         'status'
     ];
 }

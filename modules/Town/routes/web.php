@@ -8,7 +8,7 @@ Route::group([
     'prefix' => 'address/api/v1',
     'middleware' => ['cors']
 ], function () {
-    Route::group(['prefix' => 'town'], function () {
+    Route::group(['prefix' => 'towns'], function () {
         Route::get('/', 'TownController@list')->name('Town.list');
         Route::post('/', 'TownController@create')->name('Town.create');
         Route::get('/{id}', 'TownController@show')->name('Town.show');

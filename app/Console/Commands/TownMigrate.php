@@ -60,6 +60,7 @@ class TownMigrate extends Command
                 Log::info("District Info >> " . print_r($districtInfo?->toArray(), true));
                 Log::info("City Info >> " . print_r($cityInfo?->toArray(), true));
                 Log::info("Town Name >> " . $value['Town_Name_Eng']);
+                dd();
             }
         }
     }
@@ -88,7 +89,7 @@ class TownMigrate extends Command
         return [
             'en_name' => $data['Town_Name_Eng'],
             'mm_name' => $data['Town_Name_MMR'],
-            'p_code' => $data['Tsp_Pcode']
+            'p_code' => $data['Town_Pcode']
         ];
     }
 }

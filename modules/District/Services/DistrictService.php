@@ -5,6 +5,7 @@ namespace District\Services;
 use Illuminate\Http\Request;
 use App\Helpers\DataSafetyTrait;
 use District\DataModels\DistrictDataModel;
+use Illuminate\Database\Eloquent\Collection;
 use District\DataModels\DistrictListDataModel;
 use District\Contracts\Services\DistrictServiceInterface;
 use District\Contracts\Repositories\DistrictRepositoryInterface;
@@ -17,24 +18,28 @@ class DistrictService implements DistrictServiceInterface
         private DistrictRepositoryInterface $districtRepo
     ) {
     }
-    public function getDistrictLists(Request $request): DistrictListDataModel
+    public function getDistrictLists(Request $request): Collection
     {
-        $perPage = $request->per_page ?? 10;
-        $page = $request->page ?? 1;
+        // if (!empty($request->state_id) && !empty($request->country_id)) {
+        //     $result = $this->districtRepo->getDistrictByStateAndCountry($request);
+        //     return new DistrictListDataModel($result);
+        // }
 
-        if (!empty($request->state_id) && !empty($request->country_id)) {
-            $result = $this->districtRepo->getDistrictByStateAndCountry($request);
-            return new DistrictListDataModel($result);
-        }
+        $result = $this->districtRepo->getDistrictLists();
 
-        $result = $this->districtRepo->getDistrictLists($perPage, $page);
+        return $result;
+    }
+
+    public function getDistrictPagination(int $perPage, int $page): DistrictListDataModel
+    {
+        $result = $this->districtRepo->getDistrictPagination($perPage, $page);
 
         return new DistrictListDataModel($result);
     }
 
-    public function createDistrict(array $data): DistrictDataModel
+    public function firstOrCreateDistrict(array $data): DistrictDataModel
     {
-        $result = $this->districtRepo->createDistrict($data);
+        $result = $this->districtRepo->firstOrCreateDistrict($data);
 
         return new DistrictDataModel($result);
     }

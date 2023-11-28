@@ -8,7 +8,7 @@ Route::group([
     'prefix' => 'address/api/v1',
     'middleware' => ['cors']
 ], function () {
-    Route::group(['prefix' => 'district'], function () {
+    Route::group(['prefix' => 'districts'], function () {
         Route::get('/', 'DistrictController@list')->name('district.list');
         Route::post('/', 'DistrictController@create')->name('district.create');
         Route::get('/{id}', 'DistrictController@show')->name('district.show');

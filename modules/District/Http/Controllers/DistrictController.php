@@ -18,7 +18,13 @@ class DistrictController extends Controller
 
     public function list(Request $request)
     {
-        $result = $this->districtService->getDistrictLists($request);
+        if ($request->per_page || $request->page) {
+            $perPage = $request->per_page ?? 10;
+            $page = $request->page ?? 1;
+            $result = $this->districtService->getDistrictPagination($perPage, $page);
+        } else {
+            $result = $this->districtService->getDistrictLists($request);
+        }
         return response()->json($result->toArray(), Response::HTTP_OK);
     }
 

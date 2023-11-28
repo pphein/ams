@@ -4,6 +4,7 @@ namespace State\Repositories;
 
 use Illuminate\Http\Request;
 use State\Contracts\Models\StateInterface;
+use Illuminate\Database\Eloquent\Collection;
 use State\Contracts\Repositories\StateRepositoryInterface;
 
 class StateRepository implements StateRepositoryInterface
@@ -13,14 +14,19 @@ class StateRepository implements StateRepositoryInterface
     ) {
     }
 
-    public function getStateLists(int $perPage, int $page): mixed
+    public function getStatePagination(int $perPage, int $page): mixed
     {
         return $this->state->where('status', 0)->paginate(perPage: $perPage, page: $page);
     }
 
-    public function createState(array $data): ?StateInterface
+    public function getStateLists(): Collection
     {
-        return $this->state->create($data);
+        return $this->state->where('status', 0)->get();
+    }
+
+    public function firstOrCreateState(array $data): ?StateInterface
+    {
+        return $this->state->firstOrCreate($data);
     }
 
     public function showStateById(int $id): ?StateInterface
@@ -42,6 +48,11 @@ class StateRepository implements StateRepositoryInterface
 
     public function getStateByCountryId(int $countryId, int $perPage, int $page): mixed
     {
-        return $this->state->where('State_id', $countryId)->where('status', 0)->paginate(perPage: $perPage, page: $page);
+        return $this->state->where('country_id', $countryId)->where('status', 0)->paginate(perPage: $perPage, page: $page);
+    }
+
+    public function getStateByNameAndPCode(string $stateName, string $statePcode): ?StateInterface
+    {
+        return $this->state->where('p_code', $statePcode)->where('en_name', $stateName)->first();
     }
 }

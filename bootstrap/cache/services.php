@@ -39,6 +39,7 @@
     35 => 'City\\Providers\\ModuleServiceProvider',
     36 => 'Township\\Providers\\ModuleServiceProvider',
     37 => 'Town\\Providers\\ModuleServiceProvider',
+    38 => 'Ward\\Providers\\ModuleServiceProvider',
   ),
   'eager' => 
   array (
@@ -66,6 +67,7 @@
     21 => 'City\\Providers\\ModuleServiceProvider',
     22 => 'Township\\Providers\\ModuleServiceProvider',
     23 => 'Town\\Providers\\ModuleServiceProvider',
+    24 => 'Ward\\Providers\\ModuleServiceProvider',
   ),
   'deferred' => 
   array (

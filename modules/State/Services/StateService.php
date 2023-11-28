@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Helpers\DataSafetyTrait;
 use State\DataModels\StateDataModel;
 use State\DataModels\StateListDataModel;
+use Illuminate\Database\Eloquent\Collection;
 use State\Contracts\Services\StateServiceInterface;
 use State\Contracts\Repositories\StateRepositoryInterface;
 
@@ -17,24 +18,17 @@ class StateService implements StateServiceInterface
         private StateRepositoryInterface $stateRepo
     ) {
     }
-    public function getStateLists(Request $request): StateListDataModel
+
+    public function getStateLists(Request $request): Collection
     {
-        $perPage = $request->per_page ?? 10;
-        $page = $request->page ?? 1;
+        $result = $this->stateRepo->getStateLists();
 
-        if (!empty($request->country_id)) {
-            $result = $this->stateRepo->getStateByDistrictAndCity($request);
-            return new StateListDataModel($result);
-        }
-
-        $result = $this->stateRepo->getStateLists($perPage, $page);
-
-        return new StateListDataModel($result);
+        return $result;
     }
 
-    public function createState(array $data): StateDataModel
+    public function firstOrCreateState(array $data): StateDataModel
     {
-        $result = $this->stateRepo->createState($data);
+        $result = $this->stateRepo->firstOrCreateState($data);
 
         return new StateDataModel($result);
     }
@@ -59,6 +53,13 @@ class StateService implements StateServiceInterface
     public function destroyStateById(int $id): bool
     {
         return $this->stateRepo->destroyStateById($id);
+    }
+
+    public function getStatePagination(int $perPage, int $page): StateListDataModel
+    {
+        $result = $this->stateRepo->getStatePagination($perPage, $page);
+
+        return new StateListDataModel($result);
     }
 
     public function getStateByCountryId(int $id, Request $request): StateListDataModel

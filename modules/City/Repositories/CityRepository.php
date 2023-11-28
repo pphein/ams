@@ -4,6 +4,7 @@ namespace City\Repositories;
 
 use Illuminate\Http\Request;
 use City\Contracts\Models\CityInterface;
+use Illuminate\Database\Eloquent\Collection;
 use City\Contracts\Repositories\CityRepositoryInterface;
 
 class CityRepository implements CityRepositoryInterface
@@ -13,14 +14,19 @@ class CityRepository implements CityRepositoryInterface
     ) {
     }
 
-    public function getCityLists(int $perPage, int $page): mixed
+    public function getCityLists(): Collection
+    {
+        return $this->city->where('status', 0)->get();
+    }
+
+    public function getCityPagination(int $perPage, int $page): mixed
     {
         return $this->city->where('status', 0)->paginate(perPage: $perPage, page: $page);
     }
 
-    public function createCity(array $data): ?CityInterface
+    public function firstOrCreateCity(array $data): ?CityInterface
     {
-        return $this->city->create($data);
+        return $this->city->firstOrCreate($data);
     }
 
     public function showCityById(int $id): ?CityInterface
@@ -61,5 +67,10 @@ class CityRepository implements CityRepositoryInterface
             ->where('state_id', $stateId)
             ->where('country', $countryId)
             ->where('status', 0)->paginate(perPage: $perPage, page: $page);
+    }
+
+     public function getCityByNameAndPCode(string $name, string $PCode): ?CityInterface
+    {
+        return $this->city->where('en_name', $name)->where('p_code', $PCode)->where('status', 0)->first();
     }
 }

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Log;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
 use City\Contracts\Repositories\CityRepositoryInterface;
 use Township\Contracts\Services\TownshipServiceInterface;
+use State\Contracts\Repositories\StateRepositoryInterface;
 use District\Contracts\Repositories\DistrictRepositoryInterface;
 
 class TownshipMigrate extends Command
@@ -16,6 +17,7 @@ class TownshipMigrate extends Command
     protected $description = 'Migration township from MIMU Data';
 
     public function __construct(
+        private StateRepositoryInterface $stateRepo,
         private CityRepositoryInterface $cityRepo,
         private DistrictRepositoryInterface $districtRepo,
         private TownshipServiceInterface $townshipService
@@ -33,21 +35,27 @@ class TownshipMigrate extends Command
         $data = $this->prepareTownshipData();
         foreach ($data as $key => $value) {
             Log::info("Township migration data >> " . print_r($value, true));
+            $stateName = $value['SR_Name_Eng'];
+            $statePCode = $value['SR_Pcode'];
             $districtName = $value['District/SAZ_Name_Eng'];
             $districtPCode = $value['District/SAZ_Pcode'];
             $cityName = $value['City_Name_Eng'];
             $cityPCode = $value['City_Pcode'];
             $formattedData = $this->formatTownshipData($value);
+            $stateInfo = $this->stateRepo->getStateByNameAndPCode($stateName, $statePCode);
             $districtInfo = $this->districtRepo->getDistrictByNameAndPCode($districtName, $districtPCode);
             $cityInfo = $this->cityRepo->getCityByNameAndPCode($cityName, $cityPCode);
-            if (!empty($districtInfo) && !empty($cityInfo)) {
+            if (!empty($stateInfo) && !empty($districtInfo) && !empty($cityInfo)) {
                 $formattedData['district_id'] = $districtInfo->id;
                 $formattedData['city_id'] = $cityInfo->id;
-                if ($districtInfo->state_id == $cityInfo->state_id) {
-                    $formattedData['state_id'] = $districtInfo->state_id;
-                }
-                // $formattedData['country_id'] = $stateInfo->country_id;
+                $formattedData['state_id'] = $stateInfo->id;
                 $this->townshipService->createTownship($formattedData);
+            } else {
+                Log::info("Failed to create >> " . $formattedData['en_name']);
+                Log::info("State Info >> " . json_encode($stateInfo));
+                Log::info("City Info >> " . json_encode($cityInfo));
+                Log::info("District Info >> " . json_encode($districtInfo));
+                dd();
             }
         }
     }
