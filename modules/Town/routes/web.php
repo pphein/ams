@@ -17,6 +17,7 @@ Route::group([
         Route::get('/township/{id}', 'TownController@getByTownshipId')->name('Town.getByTownshipId');
         Route::get('/district/{id}', 'TownController@getByDistrictId')->name('Town.getByDistrictId');
         Route::get('/city/{id}', 'TownController@getByCityId')->name('Town.getByCityId');
-        Route::get('/District/{id}', 'TownController@getByDistrictId')->name('Town.getByDistrictId');
+        Route::get('/district/{id}', 'TownController@getByDistrictId')->name('Town.getByDistrictId');
+        Route::get('/state/{id}', 'TownController@getByStateId')->name('Town.getByStateId');
     });
 });

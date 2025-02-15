@@ -64,7 +64,7 @@ class WardMigrate extends Command
                 // $formattedData['country_id'] = $stateInfo->country_id;
                 $this->wardService->firstOrCreateWard($formattedData);
             } else {
-                Log::info("Failed to create");
+                Log::info("Failed to create" . print_r($value, true));
                 Log::info("Township Info >> " . print_r($townshipInfo?->toArray(), true));
                 Log::info("District Info >> " . print_r($districtInfo?->toArray(), true));
                 Log::info("Town Info >> " . print_r($townInfo?->toArray(), true));

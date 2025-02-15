@@ -46,6 +46,11 @@ class WardRepository implements WardRepositoryInterface
         ]);
     }
 
+    public function getWardByStateId(int $stateId, int $perPage, int $page): mixed
+    {
+        return $this->ward->where('state_id', $stateId)->where('status', 0)->paginate(perPage: $perPage, page: $page);
+    }
+
     public function getWardByDistrictId(int $districtId, int $perPage, int $page): mixed
     {
         return $this->ward->where('District_id', $districtId)->where('status', 0)->paginate(perPage: $perPage, page: $page);

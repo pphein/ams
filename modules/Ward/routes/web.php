@@ -19,5 +19,6 @@ Route::group([
         Route::get('/district/{id}', 'WardController@getByDistrictId')->name('Ward.getByDistrictId');
         Route::get('/city/{id}', 'WardController@getByCityId')->name('Ward.getByCityId');
         Route::get('/district/{id}', 'WardController@getByDistrictId')->name('Ward.getByDistrictId');
+        Route::get('/state/{id}', 'WardController@getByStateId')->name('Ward.getByStateId');
     });
 });

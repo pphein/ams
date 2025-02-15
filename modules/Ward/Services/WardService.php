@@ -66,6 +66,16 @@ class WardService implements WardServiceInterface
         return $this->wardRepo->destroyWardById($id);
     }
 
+    public function getWardByStateId(int $id, Request $request): WardListDataModel
+    {
+        $perPage = $request->per_page ?? 10;
+        $page = $request->page ?? 1;
+
+        $result = $this->wardRepo->getWardByStateId($id, $perPage, $page);
+
+        return new WardListDataModel($result);
+    }
+
     public function getWardByDistrictId(int $id, Request $request): WardListDataModel
     {
         $perPage = $request->per_page ?? 10;
@@ -87,6 +97,16 @@ class WardService implements WardServiceInterface
     }
 
     public function getWardByTownshipId(int $id, Request $request): WardListDataModel
+    {
+        $perPage = $request->per_page ?? 10;
+        $page = $request->page ?? 1;
+
+        $result = $this->wardRepo->getWardByTownshipId($id, $perPage, $page);
+
+        return new WardListDataModel($result);
+    }
+
+    public function getWardByTownId(int $id, Request $request): WardListDataModel
     {
         $perPage = $request->per_page ?? 10;
         $page = $request->page ?? 1;

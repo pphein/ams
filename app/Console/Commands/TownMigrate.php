@@ -55,7 +55,7 @@ class TownMigrate extends Command
                 // $formattedData['country_id'] = $stateInfo->country_id;
                 $this->townService->createTown($formattedData);
             } else {
-                Log::info("Failed to create");
+                Log::info("Failed to create " . print_r($value, true));
                 Log::info("Township Info >> " . print_r($townshipInfo?->toArray(), true));
                 Log::info("District Info >> " . print_r($districtInfo?->toArray(), true));
                 Log::info("City Info >> " . print_r($cityInfo?->toArray(), true));

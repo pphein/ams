@@ -66,6 +66,16 @@ class TownshipService implements TownshipServiceInterface
         return $this->townshipRepo->destroyTownshipById($id);
     }
 
+    public function getTownshipByStateId(int $id, Request $request): TownshipListDataModel
+    {
+        $perPage = $request->per_page ?? 10;
+        $page = $request->page ?? 1;
+
+        $result = $this->townshipRepo->getTownshipByStateId($id, $perPage, $page);
+
+        return new TownshipListDataModel($result);
+    }
+
     public function getTownshipByDistrictId(int $id, Request $request): TownshipListDataModel
     {
         $perPage = $request->per_page ?? 10;

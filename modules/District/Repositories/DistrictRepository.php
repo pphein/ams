@@ -48,12 +48,12 @@ class DistrictRepository implements DistrictRepositoryInterface
 
     public function getDistrictByStateId(int $stateId, int $perPage, int $page): mixed
     {
-        return $this->district->where('district_id', $stateId)->where('status', 0)->paginate(perPage: $perPage, page: $page);
+        return $this->district->where('state_id', $stateId)->where('status', 0)->paginate(perPage: $perPage, page: $page);
     }
 
     public function getDistrictByCountryId(int $countryId, int $perPage, int $page): mixed
     {
-        return $this->district->where('district_id', $countryId)->where('status', 0)->paginate(perPage: $perPage, page: $page);
+        return $this->district->where('country_id', $countryId)->where('status', 0)->paginate(perPage: $perPage, page: $page);
     }
 
     public function getDistrictByStateAndCountry(Request $request)

@@ -53,6 +53,12 @@ class WardController extends Controller
         return response()->json([], Response::HTTP_NO_CONTENT);
     }
 
+    public function getByStateId(int $id, Request $request)
+    {
+        $result = $this->wardService->getWardByStateId($id, $request);
+        return response()->json($result->toArray(), Response::HTTP_OK);
+    }
+
     public function getByDistrictId(int $id, Request $request)
     {
         $result = $this->wardService->getWardByDistrictId($id, $request);
@@ -67,7 +73,7 @@ class WardController extends Controller
 
     public function getByWardshipId(int $id, Request $request)
     {
-        $result = $this->wardService->getWardByTownshipshipId($id, $request);
+        $result = $this->wardService->getWardByTownshipId($id, $request);
         return response()->json($result->toArray(), Response::HTTP_OK);
     }
 

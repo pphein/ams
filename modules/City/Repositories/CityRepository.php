@@ -48,12 +48,12 @@ class CityRepository implements CityRepositoryInterface
 
     public function getCityByStateId(int $stateId, int $perPage, int $page): mixed
     {
-        return $this->city->where('City_id', $stateId)->where('status', 0)->paginate(perPage: $perPage, page: $page);
+        return $this->city->where('state_id', $stateId)->where('status', 0)->paginate(perPage: $perPage, page: $page);
     }
 
     public function getCityByCountryId(int $countryId, int $perPage, int $page): mixed
     {
-        return $this->city->where('City_id', $countryId)->where('status', 0)->paginate(perPage: $perPage, page: $page);
+        return $this->city->where('country_id', $countryId)->where('status', 0)->paginate(perPage: $perPage, page: $page);
     }
 
     public function getCityByStateAndCountry(Request $request)
